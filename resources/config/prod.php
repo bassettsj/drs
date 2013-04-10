@@ -22,10 +22,10 @@ $app['assetic.path_to_cache']        = $app['cache.path'] . '/assetic' ;
 $app['assetic.path_to_web']          = __DIR__ . '/../../web/assets';
 $app['assetic.input.path_to_assets'] = __DIR__ . '/../assets';
 
-$app['assetic.input.path_to_css']       = $app['assetic.input.path_to_assets'] . '/less/style.less';
+$app['assetic.input.path_to_css']       = $app['assetic.input.path_to_assets'] . '/css/style.css';
 $app['assetic.output.path_to_css']      = 'css/styles.css';
 $app['assetic.input.path_to_js']        = array(
-    __DIR__.'/../../vendor/twitter/bootstrap/js/*.js',
+    __DIR__.'/../../vendor/twitter/bootstrap/docs/assets/js/bootstrap.js',
     $app['assetic.input.path_to_assets'] . '/js/script.js',
 );
 $app['assetic.output.path_to_js']       = 'js/scripts.js';
@@ -36,7 +36,8 @@ $app['db.options'] = array(
     'host'     => 'localhost',
     'dbname'   => 'silex_kitchen',
     'user'     => 'root',
-    'password' => '',
+    'password' => 'root',
+    'port'     => '8889'
 );
 
 // User
