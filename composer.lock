@@ -1,5 +1,9 @@
 {
-    "hash": "7311829bf37dba1f49b378da234cf258",
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "fb4a459c832e59ded22629351efafdbf",
     "packages": [
         {
             "name": "doctrine/common",
@@ -420,6 +424,52 @@
             "time": "2012-12-21 11:40:51"
         },
         {
+            "name": "raveren/kint",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/raveren/kint.git",
+                "reference": "5b3b0c7bc63643183fc4551f0e97e351ca38d67b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/raveren/kint/zipball/5b3b0c7bc63643183fc4551f0e97e351ca38d67b",
+                "reference": "5b3b0c7bc63643183fc4551f0e97e351ca38d67b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "Kint.class.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rokas Šleinius",
+                    "homepage": "https://github.com/raveren"
+                },
+                {
+                    "name": "Contributors",
+                    "homepage": "https://github.com/raveren/kint/contributors"
+                }
+            ],
+            "description": "Kint - debugging helper for PHP developers",
+            "homepage": "https://github.com/raveren/kint",
+            "keywords": [
+                "debug",
+                "kint",
+                "php"
+            ],
+            "time": "2013-04-09 10:45:42"
+        },
+        {
             "name": "silex/silex",
             "version": "dev-master",
             "source": {
@@ -499,6 +549,49 @@
                 "microframework"
             ],
             "time": "2013-03-08 16:56:52"
+        },
+        {
+            "name": "solarium/solarium",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/basdenooijer/solarium.git",
+                "reference": "6080255bab1b96f457c0548f0443645a1538c79a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/basdenooijer/solarium/zipball/6080255bab1b96f457c0548f0443645a1538c79a",
+                "reference": "6080255bab1b96f457c0548f0443645a1538c79a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/event-dispatcher": ">=2.1.0,<2.3-dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Solarium\\": "library/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "NewBSD"
+            ],
+            "authors": [
+                {
+                    "name": "See GitHub contributors",
+                    "homepage": "https://github.com/basdenooijer/solarium/contributors"
+                }
+            ],
+            "description": "PHP Solr client",
+            "homepage": "http://www.solarium-project.org",
+            "keywords": [
+                "php",
+                "search",
+                "solr"
+            ],
+            "time": "2013-03-21 14:12:02"
         },
         {
             "name": "symfony/config",
@@ -1630,7 +1723,9 @@
     "stability-flags": {
         "leafo/lessphp": 20,
         "mheap/silex-assetic": 20,
-        "silex/silex": 20
+        "silex/silex": 20,
+        "solarium/solarium": 20,
+        "raveren/kint": 20
     },
     "platform": {
         "php": ">=5.3.3"
