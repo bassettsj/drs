@@ -1,0 +1,3 @@
+[submodule "resources/wiki"]
+	path = resources/wiki
+	url = git@github.com:bassettsj/drs.wiki.git
