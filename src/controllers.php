@@ -10,7 +10,7 @@ $app->match('/', function() use ($app) {
     $form = $builder
     ->add('search', 'search')
     ->getForm();
-    d($form->createView());
+
 
     return $app['twig']->render('index.html.twig', array('search' => $form->createView()));
 })->bind('homepage');
@@ -160,14 +160,66 @@ $app->error(function (\Exception $e, $code) use ($app) {
 });
 
 /**
- * View object.
+ * browse controller
+ */
+
+$app->match('/browse', function() use ($app){
+    d($app['session']);
+    $pid = 20;
+    return $app['twig']->render('view.html.twig', array('pid' => $pid));
+})->bind('browse');
+
+
+
+/**
+ * Advanced Search Controller
+ */
+
+$app->get('/search', function() use ($app){
+    return "Advanced Search Path";
+})->bind('search');
+
+/**
+ *  Simple search with keywork
+ */
+
+$app->post('/search/{keywords}', function($keywords) use ($app){
+    return $keywords;
+});
+
+
+/**
+ * view controller
  */
 
 $app->match('/view/{pid}', function($pid) use ($app){
 
+    return 'Hello World!';
+}); 
 
-    
-    return $app['twig']->render('view.html.twig', array('pid' => $pid));
-});
+/**
+ *  MyDRS Controller.
+ */
+
+$app->match('/my-drs', function() use ($app){
+    return "My DRS";
+})->bind('my-drs');
+
+
+/**
+ * Add content to repository
+ */
+$app->get('/add-content', function() use($app){
+    return "Add Content Path";
+})->bind('add-content');
+
+
+/**
+ * Add collection to repository 
+ */
+
+$app->get('/add-collection', function() use ($app){
+    return "Add collection path.";
+})->bind('add-collection');
 
 return $app;
