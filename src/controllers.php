@@ -6,10 +6,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints as Assert;
 
 $app->match('/', function() use ($app) {
-    $builder = $app['form.factory']->createBuilder('form')
-    ->add('search_term','search',array('label'=>'Search'))->getForm();
+    $builder = $app['form.factory']->createBuilder('form');
+    $form = $builder
+    ->add('search', 'search')
+    ->getForm();
+    d($form->createView());
 
-    return $app['twig']->render('index.html.twig');
+    return $app['twig']->render('index.html.twig', array('search' => $form->createView()));
 })->bind('homepage');
 
 $app->match('/login', function(Request $request) use ($app) {
@@ -135,6 +138,11 @@ $app->get('/page-with-cache', function() use ($app) {
     return $response;
 })->bind('page_with_cache');
 
+/**
+ * Error handling for page can't be found etc.
+ * 
+ */
+
 $app->error(function (\Exception $e, $code) use ($app) {
     if ($app['debug']) {
         return;
@@ -149,6 +157,17 @@ $app->error(function (\Exception $e, $code) use ($app) {
     }
 
     return new Response($message, $code);
+});
+
+/**
+ * View object.
+ */
+
+$app->match('/view/{pid}', function($pid) use ($app){
+
+
+    
+    return $app['twig']->render('view.html.twig', array('pid' => $pid));
 });
 
 return $app;
