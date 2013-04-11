@@ -1,4 +1,5 @@
 <?php
+require __DIR__.'/private.php';
 
 // Local
 $app['locale'] = 'en-US';
@@ -42,3 +43,6 @@ $app['db.options'] = array(
 
 // User
 $app['security.users'] = array('username' => array('ROLE_USER', 'password'));
+
+
+

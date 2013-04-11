@@ -5,6 +5,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * Example homepage
+ */
+
 $app->match('/', function() use ($app) {
     $builder = $app['form.factory']->createBuilder('form');
     $form = $builder
@@ -15,6 +19,10 @@ $app->match('/', function() use ($app) {
     return $app['twig']->render('index.html.twig', array('search' => $form->createView()));
 })->bind('homepage');
 
+/**
+ * Example login page.
+ * 
+ */
 $app->match('/login', function(Request $request) use ($app) {
     $form = $app['form.factory']->createBuilder('form')
         ->add('username', 'text', array('label' => 'Username', 'data' => $app['session']->get('_security.last_username')))
@@ -27,6 +35,10 @@ $app->match('/login', function(Request $request) use ($app) {
         'error' => $app['security.last_error']($request),
     ));
 })->bind('login');
+
+/**
+ * Example DB page
+ */
 
 $app->match('/doctrine', function() use ($app) {
     return $app['twig']->render(
@@ -183,8 +195,10 @@ $app->get('/search', function() use ($app){
  *  Simple search with keywork
  */
 
-$app->post('/search/{keywords}', function($keywords) use ($app){
-    return $keywords;
+$app->match('/search/{keywords}', function($keywords) use ($app){
+    
+    return $app['solr.conf'];
+   
 });
 
 

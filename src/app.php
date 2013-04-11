@@ -13,8 +13,8 @@ use SilexAssetic\AsseticExtension;
 use Symfony\Component\Security\Core\Encoder\PlaintextPasswordEncoder;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
 
-$app->register(new HttpCacheServiceProvider());
 
+$app->register(new HttpCacheServiceProvider());
 $app->register(new SessionServiceProvider());
 $app->register(new ValidatorServiceProvider());
 $app->register(new FormServiceProvider());
@@ -41,13 +41,6 @@ $app['security.encoder.digest'] = $app->share(function ($app) {
 });
 
 $app->register(new TranslationServiceProvider());
-$app['translator'] = $app->share($app->extend('translator', function($translator, $app) {
-    $translator->addLoader('yaml', new YamlFileLoader());
-
-    $translator->addResource('yaml', __DIR__.'/../resources/locales/fr.yml', 'fr');
-
-    return $translator;
-}));
 
 $app->register(new MonologServiceProvider(), array(
     'monolog.logfile' => __DIR__.'/../resources/log/app.log',
@@ -97,6 +90,6 @@ if (isset($app['assetic.enabled']) && $app['assetic.enabled']) {
 $app->register(new Silex\Provider\DoctrineServiceProvider());
 
 
-
+//$app['solr'] = new Solarium\Client($app['solr.conf']);
 
 return $app;
