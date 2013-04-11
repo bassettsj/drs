@@ -207,8 +207,9 @@ $app->match('/search/{keywords}', function($keywords) use ($app){
  */
 
 $app->match('/view/{pid}', function($pid) use ($app){
+    
 
-    return 'Hello World!';
+    return $app['twig']->render('view.html.twig', array('pid' => $pid));
 }); 
 
 /**
