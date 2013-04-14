@@ -20,41 +20,54 @@
 </head>
 <body>
 <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
-
+    <header>
+        <a href="http://library.neu.edu" class="nu-lib-logo" alt="Northeastern Univerity, University Libraries."></a>
+    </header>
     {% set active = active|default(null) %}
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
-            <div class="container">
-                <a class="navbar-brand" href="{{ path('homepage') }}">DRS</a>
-                <div class="nav-collapse">
-                    <ul class="nav">
-                        <li {% if 'homepage' == active %}class="active"{% endif %}><a href="{{ path('homepage') }}">{{ 'Homepage'|trans }}</a></li>
-                        <li {% if 'page_with_cache' == active %}class="active"{% endif %}><a href="{{ path('page_with_cache') }}">Cache sample</a></li>
-                        <li {% if 'form' == active %}class="active"{% endif %}><a href="{{ path('form') }}">Form sample</a></li>
-                        <li {% if 'doctrine' == active %}class="active"{% endif %}><a href="{{ path('doctrine') }}">Doctrine</a></li>
-                        <li {% if 'browse' == active %}class="active"{% endif %}><a href="{{ path('browse') }}">Browse</a></li>
-
-                        <li class="dropdown{% if 'account' == active %} active{% endif %}">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                Account <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                {% if is_granted('ROLE_USER') %}
-                                    <li><a href="{{ path('logout') }}">{{ 'Logout'|trans }}</a></li>
-                                {% else %}
-                                    <li><a href="{{ path('login') }}">{{ 'Login'|trans }}</a></li>
-                                    <li><a href="#">{{ 'Register'|trans }}</a></li>
-                                {% endif %}
-                            </ul>
-                        </li>
-                    </ul>
-                </div><!--/.nav-collapse -->
-            </div>
+            <a class="navbar-brand" href="{{ path('homepage') }}">DRS</a>
+            <div class="nav-collapse">
+                <ul class="nav">
+                    <li {% if 'page_with_cache' == active %}class="active"{% endif %}>
+                        <a href="{{ path('page_with_cache') }}">Cache sample</a>
+                    </li>
+                    <li {% if 'form' == active %}class="active"{% endif %}>
+                        <a href="{{ path('form') }}">Form sample</a>
+                    </li>
+                    <li {% if 'doctrine' == active %}class="active"{% endif %}>
+                        <a href="{{ path('doctrine') }}">Doctrine</a>
+                    </li>
+                    <li {% if 'browse' == active %}class="active"{% endif %}>
+                        <a href="{{ path('browse') }}">Browse</a>
+                    </li>
+                    
+                        <form class="navbar-form pull-left" action="">
+                            <input type="text" class="col-span-8" placeholder="Search">
+                        </form>
+                    
+                    </li>
+                    <li class="dropdown{% if 'account' == active %} active{% endif %}">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Account <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% if is_granted('ROLE_USER') %}
+                                <li><a href="{{ path('logout') }}">{{ 'Logout'|trans }}</a></li>
+                            {% else %}
+                                <li><a href="{{ path('login') }}">{{ 'Login'|trans }}</a></li>
+                                <li><a href="#">{{ 'Register'|trans }}</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                </ul>
+                
+            </div><!--/.nav-collapse -->
         </div>
     </div>
 
-    <div class="container">
-        <div id="main" role="main" class="container">
+    <div>
+        <div id="main" role="main">
             {% set alertTypeAvaillable = [ 'info', 'success', 'warning', 'error'] %}
             {% for alert in alertTypeAvaillable %}
                 {% for message in app.session.getFlashBag.get(alert) %}
@@ -68,6 +81,49 @@
             {% endblock %}
         </div>
     </div>
+    <footer>
+            <div class="row-fluid">
+                        <div class="col-span-3 nu ">
+                            <a alt="Northeastern University" href="http://www.northeastern.edu">Northeastern University</a>
+                        </div>
+                        <div class="col-span-6">
+                            <nav>
+                                <ul class="info"> 
+                                    <li><a href="http://myneu.neu.edu/cp/home/displaylogin" class="ext">myNEU</a>
+                                    <li><a href="https://prod-web.neu.edu/webapp6/employeelookup/public/main.action" class="ext">Find Faculty &amp; Staff</a></li>
+                                    <li><a href="http://www.northeastern.edu/neuhome/adminlinks/findaz.html">Find A-Z</a></li>
+                                    <li><a href="http://www.northeastern.edu/emergency/index.html">Emergency Information</a></li>
+                                    <li><a href="http://www.northeastern.edu/search/index.html">Search</a></li>
+                                </ul>
+                            </nav>
+                            <p class="address">
+                                360 Huntington Ave., Boston, Massachusetts 02115 · 617.373.2000 · TTY 617.373.3768<br>
+                                &copy; <!-- TODO Change this templace to accept a year variable.-->2013 Northeastern University
+                            </p>
+                        </div>
+                        <div class="col-span-3 social icons">
+                            <!-- Youtube Icon -->
+                            <a class="social icon youtube ext" href="https://www.youtube.com/northeastern">
+                                <i class="icon-youtube icon-large"></i>
+                                <span class="hidden">Youtube</span>
+                                
+                            </a>
+                            <!-- Twitter icon -->
+                            <a class="social icon twitter ext" href="http://twitter.com/northeastern">
+                                <i class="icon-twitter-sign icon-large"></i>
+                                <span class="hidden">Twitter</span></a>
+                            
+                            <!-- Facebook Icon -->
+                            <a class="social icon facebook ext" href="http://www.facebook.com/northeastern">
+                                <i class="icon-facebook-sign icon-large"></i>
+                                <span class="hidden">Facebook</span></a>
+                            <!-- -->
+                            <a href="#top" class="pull-right">back to top &uarr;</a>
+        
+                        </div>
+        
+                    </div>
+        </footer>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="{{ app.request.basepath }}/js/libs/jquery-1.7.2.min.js"><\/script>')</script>
