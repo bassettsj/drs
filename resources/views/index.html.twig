@@ -2,7 +2,27 @@
 {% set active = 'homepage' %}
 
 {% block content %}
-    
+  <div class="row-fluid">
+    <div class="jumbotron homepage col-span-12">
+      <h1><span class="drs logo">DRS</span> | <small>digital repository service</small></h1>
+      <p>The University Library, with the support of Information Services, is pleased to offer this service to members of the Northeastern Community. The DRS is a secure environment where you can store, manage, and access your digital research, pedagogical, departmental, and administrative materials.</p>
+      <h4>The DRS provides Northeastern faculty and departments with a set of tools that support:</h4> 
+      <dl>
+        <dt>Submission</dt>
+        <dd>placing your materials into the repository is fast and simple</dd>
+        <dt>Creating Collections</dt>
+        <dd>you can create as many collections as you need</dd>
+        <dt>Access Control</dt>
+        <dd>you control who may discover and/or use your content</dd>
+        <dt>Content Aggregation</dt>
+        <dd>create customized groups of content for use in your instruction and research</dd>
+        <dt>Permanence and Preservation</dt>
+        <dd>your content is part of a university wide digital storage and preservation environment and will receive a permanent URL</dd>
+      </dl>
+      <p>
+         <a class="btn btn-info" href="#">Learn more</a>
+      </p>
+    </div> <!-- end hero-unit -->
     <div class="">
       <!-- Start Search From--> 
       <form action="" method="post" novalidate {{ form_enctype(search) }} class=" ">
@@ -19,4 +39,5 @@
     {% else %}
         Your a not logged. Please <a href="{{ path('login') }}">{{ 'connect'|trans }}</a>
     {% endif %}
+  </div>
 {% endblock %}
