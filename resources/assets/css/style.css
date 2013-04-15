@@ -5374,4 +5374,15 @@ a.list-group-item.active > .badge,
   width: 400px;
   height: 65px;
   background: url('/img/nu-libraries-logo.svg');
+  background-repeat: none;
+  background-size: cover;
+}
+
+body {
+  max-width: 100em;
+  margin: 2em auto;
+}
+
+header {
+  margin-bottom: 2em;
 }
