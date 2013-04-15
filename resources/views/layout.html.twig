@@ -20,11 +20,28 @@
 </head>
 <body>
 <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
-    <header>
-        <a href="http://library.neu.edu" class="nu-lib-logo" alt="Northeastern Univerity, University Libraries."></a>
+    <header class="row">
+        <div class="col-span-6">
+            <a href="http://library.neu.edu" class="nu-lib-logo" alt="Northeastern Univerity, University Libraries."></a>
+        </div>
+        <nav class="col-span-6">
+            <div class="btn-group pull-right">
+                <a href="#" class="dropdown-toggle btn btn-primary" data-toggle="dropdown">
+                    Account <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    {% if is_granted('ROLE_USER') %}
+                        <li><a href="{{ path('logout') }}">{{ 'Logout'|trans }}</a></li>
+                    {% else %}
+                        <li><a href="{{ path('login') }}">{{ 'Login'|trans }}</a></li>
+                        <li><a href="#">{{ 'Register'|trans }}</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
     </header>
     {% set active = active|default(null) %}
-    <div class="navbar">
+    <div class="navbar navbar-inverse">
         <div class="navbar-inner">
             <a class="navbar-brand" href="{{ path('homepage') }}">DRS</a>
             <div class="nav-collapse">
@@ -41,27 +58,10 @@
                     <li {% if 'browse' == active %}class="active"{% endif %}>
                         <a href="{{ path('browse') }}">Browse</a>
                     </li>
-                    
-                        <form class="navbar-form pull-left" action="">
-                            <input type="text" class="col-span-8" placeholder="Search">
-                        </form>
-                    
-                    </li>
-                    <li class="dropdown{% if 'account' == active %} active{% endif %}">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            Account <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            {% if is_granted('ROLE_USER') %}
-                                <li><a href="{{ path('logout') }}">{{ 'Logout'|trans }}</a></li>
-                            {% else %}
-                                <li><a href="{{ path('login') }}">{{ 'Login'|trans }}</a></li>
-                                <li><a href="#">{{ 'Register'|trans }}</a></li>
-                            {% endif %}
-                        </ul>
-                    </li>
                 </ul>
-                
+                <form class="navbar-form pull-right col-span-4" action="">
+                    <input type="text" class="" placeholder="Search">
+                </form>
             </div><!--/.nav-collapse -->
         </div>
     </div>

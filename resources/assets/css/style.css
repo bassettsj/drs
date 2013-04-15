@@ -5365,6 +5365,13 @@ a.list-group-item.active > .badge,
   }
 }
 
-body {
-  padding-top: 60px;
+.library-svg {
+  background: url('/img/nu-libraries-logo.svg');
+}
+
+.nu-lib-logo {
+  display: block;
+  width: 400px;
+  height: 65px;
+  background: url('/img/nu-libraries-logo.svg');
 }
