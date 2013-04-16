@@ -12,6 +12,7 @@ use Silex\Provider\ValidatorServiceProvider;
 use SilexAssetic\AsseticExtension;
 use Symfony\Component\Security\Core\Encoder\PlaintextPasswordEncoder;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
+use Drs\DrsCollectionServiceProvider;
 
 
 $app->register(new HttpCacheServiceProvider());
@@ -90,6 +91,16 @@ if (isset($app['assetic.enabled']) && $app['assetic.enabled']) {
 $app->register(new Silex\Provider\DoctrineServiceProvider());
 
 
-//$app['solr'] = new Solarium\Client($app['solr.conf']);
+
+
+$app->register(new Drs\DrsCollectionServiceProvider(), array(
+    'hello.default_name' => "Steven",
+    ));
+
+$app->get('/hello', function () use ($app) {
+    $name = $app['request']->get('name');
+
+    return $app['hello']($name);
+});
 
 return $app;
