@@ -93,9 +93,7 @@ $app->register(new Silex\Provider\DoctrineServiceProvider());
 
 
 
-$app->register(new Drs\DrsCollectionServiceProvider(), array(
-    'collection.default' => "neu:1",
-));
+$app->register(new Drs\DrsSearchServiceProvider());
 
 
 return $app;

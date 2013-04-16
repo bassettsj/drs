@@ -2,13 +2,9 @@
 
 namespace Drs;
 
-use Silex\application;
-
 class DrsItem {
   //String id.
   public $pid;
-  
-
   
   // CRUD
   private $create;
@@ -61,7 +57,11 @@ class DrsItem {
   //Lowres Image;
   public $lowres;
 
+  public $mods;
+
   public function __construct($pid){
     $this->pid = $pid;
+    
   }
+
 }

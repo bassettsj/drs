@@ -186,6 +186,7 @@ $app->match('/browse', function() use ($app){
  */
 
 $app->get('/search', function() use ($app){
+    d($app['solr.conf']);
     return "Advanced Search Path";
 })->bind('search');
 
@@ -195,7 +196,15 @@ $app->get('/search', function() use ($app){
 
 $app->match('/search/{keywords}', function($keywords) use ($app){
     
-    return $app['solr.conf'];
+    $client = $app['solr'];
+    d($client);
+    $query = $client->createSelect();
+    $query->setQuery('husky');
+
+    $resultset = $client->select($query);
+
+
+    return  $resultset->getNumFound();
    
 });
 
