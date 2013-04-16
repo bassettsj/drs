@@ -94,13 +94,8 @@ $app->register(new Silex\Provider\DoctrineServiceProvider());
 
 
 $app->register(new Drs\DrsCollectionServiceProvider(), array(
-    'hello.default_name' => "Steven",
-    ));
+    'collection.default' => "neu:1",
+));
 
-$app->get('/hello', function () use ($app) {
-    $name = $app['request']->get('name');
-
-    return $app['hello']($name);
-});
 
 return $app;

@@ -15,7 +15,6 @@ $app->match('/', function() use ($app) {
     ->add('search', 'search')
     ->getForm();
 
-    print_r(get_declared_classes());
     return $app['twig']->render('index.html.twig', array('search' => $form->createView()));
 })->bind('homepage');
 
@@ -176,7 +175,7 @@ $app->error(function (\Exception $e, $code) use ($app) {
  */
 
 $app->match('/browse', function() use ($app){
-
+    
     return $app['twig']->render('browse.html.twig', array('pid' => $pid));
 })->bind('browse');
 
