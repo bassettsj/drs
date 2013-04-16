@@ -61,8 +61,7 @@ class DrsItem {
   //Lowres Image;
   public $lowres;
 
-
   public function __construct($pid){
-    
+    $this->pid = $pid;
   }
 }

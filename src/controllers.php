@@ -4,7 +4,7 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Drs\DrsItem;
 /**
  * Example homepage
  */
@@ -175,7 +175,7 @@ $app->error(function (\Exception $e, $code) use ($app) {
  */
 
 $app->match('/browse', function() use ($app){
-    
+
     return $app['twig']->render('browse.html.twig', array('pid' => $pid));
 })->bind('browse');
 
@@ -205,9 +205,12 @@ $app->match('/search/{keywords}', function($keywords) use ($app){
  */
 
 $app->match('/view/{pid}', function($pid) use ($app){
-    
+    $item = new DrsItem($pid);
 
-    return $app['twig']->render('view.html.twig', array('pid' => $pid));
+    $ipid = $item->pid;
+
+    d($item);
+    return $app['twig']->render('view.html.twig', array('pid' => $ipid));
 }); 
 
 /**
