@@ -5366,23 +5366,43 @@ a.list-group-item.active > .badge,
 }
 
 .library-svg {
-  background: url('/img/nu-libraries-logo.svg');
+  background: url('/img/nu-libraries-logo.svg') no-repeat top left;
+  background-size: contain;
 }
 
 .nu-lib-logo {
   display: block;
   width: 400px;
   height: 65px;
-  background: url('/img/nu-libraries-logo.svg');
-  background-repeat: none;
-  background-size: cover;
+  max-width: 100%;
+  margin-bottom: 1em;
+  background: url('/img/nu-libraries-logo.svg') no-repeat top left;
+  background-size: contain;
 }
 
 body {
   max-width: 100em;
-  margin: 2em auto;
+  padding: 1em 1.5em 0 1.5em;
+  margin: 0 auto;
+  background-color: #FFF;
 }
 
 header {
-  margin-bottom: 2em;
+  margin-bottom: 1em;
+}
+
+header .btn-group {
+  width: 50%;
+}
+
+header .btn-group > * {
+  width: 100%;
+}
+
+.jumbotron {
+  margin-top: 1.22em;
+}
+
+.jumbotron h1 {
+  margin-top: 0;
 }
