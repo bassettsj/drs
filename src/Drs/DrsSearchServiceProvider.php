@@ -16,6 +16,7 @@ class DrsSearchServiceProvider implements ServiceProviderInterface{
              $client = new Solarium\Client($app['solr.conf']);
              return $client;
         });
+        
     }
 
     public function boot(Application $app)

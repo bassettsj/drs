@@ -197,14 +197,30 @@ $app->get('/search', function() use ($app){
 $app->match('/search/{keywords}', function($keywords) use ($app){
     
     $client = $app['solr'];
-    d($client);
     $query = $client->createSelect();
-    $query->setQuery('husky');
-
+    $query->setQuery($keywords);
     $resultset = $client->select($query);
 
+    $stub = '';
+    $stub .= $resultset->getNumFound();
 
-    return  $resultset->getNumFound();
+    foreach ($resultset as $document) {
+
+    $stub .= '<hr/><table>';
+
+    // the documents are also iterable, to get all fields
+    foreach($document AS $field => $value)
+    {
+        // this converts multivalue fields to a comma-separated string
+        if(is_array($value)) $value = implode(', ', $value);
+
+        $stub .= '<tr><th>' . $field . '</th><td>' . $value . '</td></tr>';
+    }
+
+    $stub .= '</table>';
+    }
+
+    return $stub;
    
 });
 
