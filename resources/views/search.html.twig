@@ -2,13 +2,27 @@
 {% set active = 'doctrine' %}
 
 {% block content %}
-
+  
     <h1>Searched for <i>{{ keywords }}</i></h1>
-
-    <ul>
+    {%if resultset|length > 0 %}
+       
         {% for result in resultset %}
-            <li>{{result.fields.title_string}}</li>
+          {% if loop.first or (loop.index - 1) % 4 == 0 %}
+          <div class="row">
+          {% endif %}
+            <div class="col-span-3">
+              <a href="#" class="thumbnail">
+              {{result.fields.title_display}}
+              </a>
+            </div>
+          {% if loop.last or loop.index % 4 == 0 %}
+            </div>
+          {% endif %}
         {% endfor %}
-    </ul>
+      
+
+    {% else %}
+      <h3> No Results found for {{keywords}}</h3>
+    {% endif %}
 
 {% endblock %}

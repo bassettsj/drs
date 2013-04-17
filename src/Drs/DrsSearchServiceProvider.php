@@ -16,16 +16,6 @@ class DrsSearchServiceProvider implements ServiceProviderInterface{
              $client = new Solarium\Client($app['solr.conf']);
              return $client;
         });
-        $app['solr.results'] = $app->share(function($resultset) use ($app){
-            $docset = $resultset -> getDocuments();
-            
-            $docArray = array();
-            foreach ($docset as $document){
-            $docArray[] = $document->fields();
-            }
-
-            return $docArray;
-        });
         
     }
 
