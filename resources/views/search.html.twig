@@ -7,17 +7,32 @@
     {%if resultset|length > 0 %}
        
         {% for result in resultset %}
+          
           {% if loop.first or (loop.index - 1) % 4 == 0 %}
           <div class="row">
           {% endif %}
+            
             <div class="col-span-3">
-              <a href="#" class="thumbnail">
-              {{result.fields.title_display}}
-              </a>
-            </div>
+              <div class="thumbnail">
+                <a href="{{ path('view',{ pid: result.pid } ) }}" >
+                  {% if result.lowres|length > 0  %}
+                    <img src="{{ result.lowres }}"/>
+                  {% elseif result.thumbnail|length > 0 %}
+                    <img src="{{ result.thumbnail }}" />
+                  {% else %}
+                    <div class="glyphicon-book glyphicon"></div>
+                  {% endif %}
+                </a>
+              <h4>{{result.title_display}}</h4>
+                <p>
+                {{result.publisher[0]}}
+                </p>
+              </div> <!-- end thumbail -->  
+            </div><!-- end col-span-3-->
           {% if loop.last or loop.index % 4 == 0 %}
-            </div>
+            </div><!--end row--> 
           {% endif %}
+        
         {% endfor %}
       
 

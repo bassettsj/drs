@@ -200,9 +200,9 @@ $app->match('/search/{keywords}', function($keywords) use ($app){
     $query = $client->createSelect();
     $query->setQuery($keywords);
     $query-> setRows(40);
-    $resultset = $client->select($query);
+    $resultset = $client -> select($query);
     $docset = $resultset -> getDocuments();
-    
+    d($docset);
     return $app['twig']->render('search.html.twig', array('keywords' => $keywords, 'resultset' => $docset));
 });
 
@@ -218,7 +218,7 @@ $app->match('/view/{pid}', function($pid) use ($app){
 
     d($item);
     return $app['twig']->render('view.html.twig', array('pid' => $ipid));
-}); 
+})->bind('view'); 
 
 /**
  *  MyDRS Controller.
