@@ -1,0 +1,14 @@
+{% extends 'layout.html.twig' %}
+{% set active = 'doctrine' %}
+
+{% block content %}
+
+    <h1>Searched for <i>{{ keywords }}</i></h1>
+
+    <ul>
+        {% for result in resultset %}
+            <li>{{result.fields.title_string}}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

@@ -200,28 +200,10 @@ $app->match('/search/{keywords}', function($keywords) use ($app){
     $query = $client->createSelect();
     $query->setQuery($keywords);
     $resultset = $client->select($query);
-
-    $stub = '';
-    $stub .= $resultset->getNumFound();
-
-    foreach ($resultset as $document) {
-
-    $stub .= '<hr/><table>';
-
-    // the documents are also iterable, to get all fields
-    foreach($document AS $field => $value)
-    {
-        // this converts multivalue fields to a comma-separated string
-        if(is_array($value)) $value = implode(', ', $value);
-
-        $stub .= '<tr><th>' . $field . '</th><td>' . $value . '</td></tr>';
-    }
-
-    $stub .= '</table>';
-    }
-
-    return $stub;
-   
+    $docset = $resultset -> getDocuments();
+    d($docset);
+    
+    return $app['twig']->render('search.html.twig', array('keywords' => $keywords, 'resultset' => $docset));
 });
 
 
