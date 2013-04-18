@@ -185,9 +185,40 @@ $app->match('/browse', function() use ($app){
  * Advanced Search Controller
  */
 
-$app->get('/search', function() use ($app){
-    d($app['solr.conf']);
-    return "Advanced Search Path";
+$app->match('/search', function(Request $request) use ($app){
+    $builder = $app['form.factory']->createBuilder('form');
+
+
+    $form = $builder
+        ->add('search', 'search', array(
+            'label' => 'Keywords'
+            ))
+        ->add('operator', 'choice', array(
+            'choices' => array('and', 'or'),
+            'multiple' => False,
+            'expanded' => false,
+            'label' => 'Operator'
+            ))
+        ->add('search2', 'search')
+        ->add('operator2', 'choice', array(
+            'choices' => array('and', 'or'),
+            'multiple' => False,
+            'expanded' => false,
+            ))
+        ->getForm()
+    ;
+
+    if ($request->isMethod('POST')) {
+        $form->bind($request);
+        if ($form->isValid()) {
+            $app['session']->getFlashBag()->add('success', 'The form is valid');
+        } else {
+            $form->addError(new FormError('This is a global error'));
+            $app['session']->getFlashBag()->add('info', 'The form is bind, but not valid');
+        }
+    }
+
+    return $app['twig']->render('form.html.twig', array('form' => $form->createView()));
 })->bind('search');
 
 /**
