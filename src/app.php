@@ -13,6 +13,7 @@ use SilexAssetic\AsseticExtension;
 use Symfony\Component\Security\Core\Encoder\PlaintextPasswordEncoder;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
 use Drs\DrsCollectionServiceProvider;
+use Guzzle\GuzzleServiceProvider;
 
 
 $app->register(new HttpCacheServiceProvider());
@@ -93,5 +94,8 @@ $app->register(new Silex\Provider\DoctrineServiceProvider());
 
 $app->register(new Drs\DrsSearchServiceProvider());
 
+$app->register(new GuzzleServiceProvider(), array(
+    'guzzle.services' => __DIR__ . '/../resources/config/services.json',
+    ));
 
 return $app;

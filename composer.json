@@ -30,7 +30,8 @@
         "twig/twig"             : "~1.10",
         "twitter/bootstrap"     : "2.3.1",
         "solarium/solarium"     : "dev-develop",
-        "raveren/kint": "dev-master"
+        "raveren/kint"          : "dev-master",
+        "guzzle/silex-provider" : "1.0.*@dev"
     },
     "require-dev": {
         "symfony/browser-kit"   : "~2.2",

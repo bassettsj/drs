@@ -2,7 +2,19 @@
 
 namespace Drs;
 
+
+use Silex\Application;
+use Silex\ServiceProviderInterface;
+use Drs\SearchServiceProvider;
+
+
+/**
+ * Class definition for DRS items.
+ */
+
+
 class DrsItem {
+
   //String id.
   public $pid;
   
@@ -59,14 +71,29 @@ class DrsItem {
 
   public $mods;
 
-  public function __construct($pid){
-    $this->pid = $pid;
+  public function __construct(){
     
   }
+}
 
 
-  private function getMods($pid){
-    $url = 'http://libfedora.neu.edu/fedora/objects/' . $pid . '/methods/sdef:core/getMODS';
+/**
+ *  Class definition for service provider interface.
+ */
 
-  }
+
+class DrsItemServiceProvider implements ServiceProviderInterface {
+   public function register(Application $app)
+    {
+        $app['drsitem'] = $app->share(function () use ($app) {
+             $item = new DrsItem();
+             return $item;
+        });
+        
+    }
+
+    public function boot(Application $app)
+    {
+
+    }
 }
