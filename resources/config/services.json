@@ -1,0 +1,8 @@
+{
+    "name": "drsFedora",
+    "baseUrl": "http://libfedora.neu.edu/fedora",
+    "description": "drsFedora is the Fedora Commons API to access objects in the Fedora Repository.",
+    "operations": {
+        
+    }
+}
