@@ -59,7 +59,7 @@ $app->register(new TwigServiceProvider(), array(
 ));
 
 if (isset($app['assetic.enabled']) && $app['assetic.enabled']) {
-    $app->register(new AsseticExtension(), array(
+    $app->register(new SilexAssetic\AsseticServiceProvider(), array(
         'assetic.options' => array(
             'debug'            => $app['debug'],
             'auto_dump_assets' => $app['debug'],
