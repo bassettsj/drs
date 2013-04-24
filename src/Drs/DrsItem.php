@@ -6,62 +6,20 @@ class DrsItem {
   //String id.
   public $pid;
   
-  // CRUD
-  private $create;
-  private $read;
-  private $update;
-  private $delete;
 
-  //Abstract
-  public $abstract;
 
-  //Collection ID
-  public $colid;
-
-  //Desposit Date
-  public $depositDate;
-
-  //Deposit Year
-  public $depositYear;
-
-  //Genres
-  public $genre;
-  
-  //Identifiers
-  public $identifiers;
-
-  //last modified;
-  public $lastModified;
-
-  //Owner ID
-  public $ownerID;
-
-  //Publishing Place
-  public $pubPlace;
-
-  //Publisher
-  public $publisher;
-
-  //Subject
-  public $subject;
-
-  //title
-  public $title;
-
-  //type
-  public $type;
-
-  //Thumbnail
-  public $thumbnail;
-
-  //Lowres Image;
-  public $lowres;
-
-  public $mods;
-
-  public function __construct($pid){
+  public function __construct($pid, $solr){
     $this->pid = $pid;
-    
+    $query = $solr->createSelect();
+    $query->setQuery('pid:"'.$pid.'"');
+    $query->setRows(1);
+    $result = $solr -> select($query);
+    $doc = $result -> getDocuments();
+    foreach($doc[0] as $key => $value){
+      $this->$key = $value;
+    }
+
   }
+  
 
 }

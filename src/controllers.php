@@ -243,12 +243,15 @@ $app->match('/search/{keywords}', function($keywords) use ($app){
  */
 
 $app->match('/view/{pid}', function($pid) use ($app){
-    $item = new DrsItem($pid);
+    $item = new DrsItem($pid, $app['solr']);
 
     $ipid = $item->pid;
-
+    $mods = "Hello World";
     d($item);
-    return $app['twig']->render('view.html.twig', array('pid' => $ipid));
+    return $app['twig']->render('view.html.twig', array(
+        'pid' => $ipid,
+        'mods' => $mods,
+    ));
 })->bind('view'); 
 
 /**
