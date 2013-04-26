@@ -279,4 +279,14 @@ $app->get('/add-collection', function() use ($app){
     return "Add collection path.";
 })->bind('add-collection');
 
+
+$app->get('/repo', function() use ($app){
+    $item = new DrsItem('neu:120306', $app['solr']);
+    d($item);
+    $repo = $app['drs.repo'];
+    d($repo->getMedia($item));
+    return 'REPO!';
+
+});
+
 return $app;

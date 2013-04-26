@@ -30,22 +30,22 @@ class DrsItem {
    * @param  string $identities The identity strings that are allowed to preform the CRUD operation.
    * @return boolean             If they can perform that action.
    */
-  public function permission_check($permission, $identities){
+  public function permcheck($permission, $identities){
     $permission = strtolower($permission);
     $permarray = array('create','read','update','delete');
     if (!in_array($permission, $permarray)){
       return False;
     }
     else{
-      if($identities,$this->permission){
+      if(in_array($identities,$this->$permission)){
         return True;
       }
       else{
         return False;
       }
     }
-    
-
   }
+
+
 
 }

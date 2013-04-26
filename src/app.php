@@ -93,5 +93,7 @@ $app->register(new Silex\Provider\DoctrineServiceProvider());
 
 $app->register(new Drs\DrsSearchServiceProvider());
 
+$app->register(new Drs\DrsRepoServiceProvider());
+
 
 return $app;
