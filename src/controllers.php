@@ -284,8 +284,8 @@ $app->get('/repo', function() use ($app){
     $item = new DrsItem('neu:120306', $app['solr']);
     d($item);
     $repo = $app['drs.repo'];
-    d($repo->getMedia($item));
-    return 'REPO!';
+    return $repo->getMedia($item);
+    
 
 });
 
