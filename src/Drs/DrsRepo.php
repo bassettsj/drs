@@ -23,16 +23,21 @@ class DrsRepo {
         foreach ($doc->member->attributes() as $k => $v){
           $mediaPid = str_replace('info:fedora/', '', $v);
           $mediaItem = new DrsItem($mediaPid, $solr);
-          $mediaMethodUrl  = $this -> baseUrl . $mediaItem -> pid . '/methods?format=xml';
-          $mediaMethodXML = simplexml_load_file($mediaMethodUrl);
-          d($mediaMethodXML);
-          foreach($mediaMethodXML -> sDef[0] -> methods as $method){
-            d($method);
-            foreach($method-> attributes() as $key => $value){
-              array_push($mediaItem->methods, $value);
-            }
-          }
+          $mediaItem -> mediaMethodsUrl = $this -> baseUrl . $mediaItem -> pid . '/methods?format=xml';
 
+          //Adding the old code
+          
+
+          $xp = new XsltProcessor();
+          $xml_doc = new DomDocument;
+          $xml_doc->loadXml(mediaquery($pid, $identities));
+          $xsl = new DomDocument;
+          $xsl->load("xslt/label_media.xsl");
+          $xp->importStylesheet($xsl);
+          $item_media = $xp->transformToXML($xml_doc);
+        
+
+          
           array_push($item->media, $mediaItem);
         }  
       }
