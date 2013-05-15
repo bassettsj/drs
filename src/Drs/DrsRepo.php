@@ -2,6 +2,7 @@
 
 use Drs\DrsItem;
 
+
 namespace Drs;
 
 class DrsRepo {
@@ -24,21 +25,22 @@ class DrsRepo {
           $mediaPid = str_replace('info:fedora/', '', $v);
           $mediaItem = new DrsItem($mediaPid, $solr);
           $mediaItem -> mediaMethodsUrl = $this -> baseUrl . $mediaItem -> pid . '/methods?format=xml';
-
           //Adding the old code
           
+          //Simple XML Items
+          $xml = simplexml_load_file($mediaItem -> mediaMethodsUrl);
+          $mediaItem -> mediaType = (string)$xml->sDef['pid'];
+          d($xml);
 
-          $xp = new XsltProcessor();
-          $xml_doc = new DomDocument;
-          $xml_doc->loadXml(mediaquery($pid, $identities));
-          $xsl = new DomDocument;
-          $xsl->load("xslt/label_media.xsl");
-          $xp->importStylesheet($xsl);
-          $item_media = $xp->transformToXML($xml_doc);
-        
+          $mediaItem -> mediaMethods = array();
+          foreach ($xml->sDef->method as $method){
+             
+             $mediaItem->mediaMethods[(string)$method['name']] = (string) ($this -> baseUrl . $mediaItem -> pid .'/methods/'. $mediaItem->mediaType . '/'.(string)$method['name']);
+          }
 
-          
-          array_push($item->media, $mediaItem);
+
+
+         array_push($item->media, $mediaItem);
         }  
       }
       return $item;
