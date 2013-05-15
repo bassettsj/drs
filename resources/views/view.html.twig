@@ -19,7 +19,21 @@
       </figure>
       {% if item.media is not empty %}
         <aside>
-          has media!!
+          <ul>
+          {% for media in item.media %}
+            {% if media.mediaType === "sdef:image_thumbnail"%}
+              <li>Thumbnail</li>
+              
+              
+            {% elseif media.mediaType === "sdef:image_lowres"%}
+              <li>Low Res Image</li>
+            {% elseif media.mediaType ===  "sdef:image_highres"%}
+              <li></li>
+            {% else %}
+              <li>{{meida.mediaType}}</li>
+            {% endif %}
+          {% endfor %}
+          <ul>
         </aside>
       {% endif %}
     </div>
