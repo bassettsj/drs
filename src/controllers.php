@@ -233,7 +233,7 @@ $app->match('/search/{keywords}', function($keywords) use ($app){
     $query-> setRows(40);
     $resultset = $client -> select($query);
     $docset = $resultset -> getDocuments();
-    d($docset);
+    
     return $app['twig']->render('search.html.twig', array('keywords' => $keywords, 'resultset' => $docset));
 });
 
@@ -251,14 +251,14 @@ $app->match('/view/{pid}', function($pid) use ($app){
     $repo = $app['drs.repo'];
     
     $item = $repo->getMedia($item, $solr);
+    
+
     d($item);
 
-    $ipid = $item->pid;
-    $mods = "Hello World";
-
     return $app['twig']->render('view.html.twig', array(
-        'pid' => $ipid,
-        'mods' => $mods,
+        'item' => $item,
+        
+        
     ));
 })->bind('view'); 
 

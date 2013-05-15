@@ -1,7 +1,28 @@
 {% extends 'layout.html.twig' %}
 {% set active = 'browse' %}
 
+
+
+
 {% block content %}
-    {{pid}}
-    {{mods}}
+  {% if item.type_txt == "image" %}
+  <article>
+    <header>  
+      <h1>{{  item.title_display }}</h1>
+    </header>
+    <div class="row">
+      <figure class="col col-lg-6">
+        <img src="{{item.lowres}}"/>
+        <figcaption>
+          {{item.abstract[0]}}
+        </figcaption>
+      </figure>
+      {% if item.media is not empty %}
+        <aside>
+          has media!!
+        </aside>
+      {% endif %}
+    </div>
+  <article>
+  {% endif %}
 {% endblock %}

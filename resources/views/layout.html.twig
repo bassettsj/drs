@@ -7,24 +7,24 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title>{{ 'Homepage'|trans }}</title>
+    <title>{{ 'Homepage' }}</title>
 
     <meta name="description" content="">
     <meta name="author" content="">
 
     <meta name="viewport" content="width=device-width">
 
-    <link rel="stylesheet" href="{{ app.request.basepath }}/assets/css/styles.css">
+    <link rel="stylesheet" href="{{ app.request.basepath }}/assets/css/style.css">
 
     <script src="{{ app.request.basepath }}/js/libs/modernizr-2.5.3-respond-1.1.0.min.js"></script>
 </head>
 <body>
 <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
     <header class="row">
-        <div class="col-span-6">
+        <div class="col col-lg-6">
             <a href="http://library.neu.edu" class="nu-lib-logo" alt="Northeastern Univerity, University Libraries."></a>
         </div>
-        <nav class="col-span-6">
+        <nav class="col col-lg-6">
             <div class="btn-group pull-right">
                 <a href="#" class="dropdown-toggle btn btn-primary" data-toggle="dropdown">
                     <span class="glyphicon-user glyphicon"></span>Account <b class="caret"></b>
@@ -42,10 +42,10 @@
     </header>
     {% set active = active|default(null) %}
     <div class="navbar navbar-inverse">
-        <div class="navbar-inner">
+        <!-- <div class="container"> -->
             <a class="navbar-brand" href="{{ path('homepage') }}">DRS</a>
-            <div class="nav-collapse">
-                <ul class="nav">
+            <div class="nav-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav">
                     <li {% if 'page_with_cache' == active %}class="active"{% endif %}>
                         <a href="{{ path('page_with_cache') }}">Cache sample</a>
                     </li>
@@ -63,6 +63,11 @@
                     <input type="text" class="" placeholder="Search">
                 </form>
             </div><!--/.nav-collapse -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
         </div>
     </div>
 
@@ -82,11 +87,11 @@
         </div>
     </div>
     <footer>
-            <div class="row-fluid">
-                        <div class="col-span-3 nu ">
+            <div class="row">
+                        <div class="col col-lg-3 nu ">
                             <a alt="Northeastern University" href="http://www.northeastern.edu">Northeastern University</a>
                         </div>
-                        <div class="col-span-6">
+                        <div class="col col-lg-6">
                             <nav>
                                 <ul class="info"> 
                                     <li><a href="http://myneu.neu.edu/cp/home/displaylogin" class="ext">myNEU</a>
@@ -101,7 +106,7 @@
                                 &copy; <!-- TODO Change this templace to accept a year variable.-->2013 Northeastern University
                             </p>
                         </div>
-                        <div class="col-span-3 social icons">
+                        <div class="col col-lg-3 social icons">
                             <!-- Youtube Icon -->
                             <a class="social icon youtube ext" href="https://www.youtube.com/northeastern">
                                 <i class="icon-youtube icon-large"></i>

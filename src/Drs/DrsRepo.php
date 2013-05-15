@@ -2,7 +2,6 @@
 
 use Drs\DrsItem;
 
-
 namespace Drs;
 
 class DrsRepo {
@@ -30,7 +29,7 @@ class DrsRepo {
           //Simple XML Items
           $xml = simplexml_load_file($mediaItem -> mediaMethodsUrl);
           $mediaItem -> mediaType = (string)$xml->sDef['pid'];
-          d($xml);
+    
 
           $mediaItem -> mediaMethods = array();
           foreach ($xml->sDef->method as $method){
