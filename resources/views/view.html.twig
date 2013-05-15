@@ -17,24 +17,24 @@
           {{item.abstract[0]}}
         </figcaption>
       </figure>
+      
+
       {% if item.media is not empty %}
-        <aside>
+        <div>
           <ul>
           {% for media in item.media %}
-            {% if media.mediaType === "sdef:image_thumbnail"%}
-              <li>Thumbnail</li>
-              
-              
-            {% elseif media.mediaType === "sdef:image_lowres"%}
+            {% if media.mediaType == "sdef:image_thumbnail"%}
+              <li><a href="{{media.mediaMethods.getTHUMBNAIL}}">Thumbnail</a><a href="{{media.mediaMethods.getFITS}}"><span class="glyphicon-info-sign glyphicon"></span></a></li>
+            {% elseif media.mediaType == "sdef:image_lowres"%}
               <li>Low Res Image</li>
-            {% elseif media.mediaType ===  "sdef:image_highres"%}
-              <li></li>
+            {% elseif media.mediaType ==  "sdef:image_highres"%}
+              <li>High Resolution Image</li>
             {% else %}
               <li>{{meida.mediaType}}</li>
             {% endif %}
           {% endfor %}
           <ul>
-        </aside>
+        </div>
       {% endif %}
     </div>
   <article>
