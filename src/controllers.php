@@ -5,6 +5,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints as Assert;
 use Drs\DrsItem;
+use Drs\DrsUser;
 /**
  * Example homepage
  */
@@ -175,6 +176,7 @@ $app->error(function (\Exception $e, $code) use ($app) {
  */
 
 $app->match('/browse', function() use ($app){
+    $pid = "Something"; 
 
     return $app['twig']->render('browse.html.twig', array('pid' => $pid));
 })->bind('browse');
@@ -205,13 +207,21 @@ $app->match('/search', function(Request $request) use ($app){
             'multiple' => False,
             'expanded' => false,
             ))
-        ->getForm()
-    ;
+        ->getForm();
 
     if ($request->isMethod('POST')) {
         $form->bind($request);
         if ($form->isValid()) {
-            $app['session']->getFlashBag()->add('success', 'The form is valid');
+            d($request);
+
+            $client = $app['solr'];
+            $query = $client->createSelect();
+            $query->setQuery($keywords);
+            $query-> setRows(40);
+            $resultset = $client -> select($query);
+            $docset = $resultset -> getDocuments();
+            //d($docset);
+            return $app['twig']->render('search.html.twig', array('keywords' => $keywords, 'resultset' => $docset));
         } else {
             $form->addError(new FormError('This is a global error'));
             $app['session']->getFlashBag()->add('info', 'The form is bind, but not valid');
@@ -309,6 +319,27 @@ $app->get('/download/{pid}', function($pid) use ($app){
     return $hires;
 });
 
+
+
+
+
+$app->match('/my-account', function(Request $request) use ($app) {
+    
+    $user =  new DrsUser( 
+     56100,
+     "Library-Office Of The Director",
+     "SC79",
+     "Library",
+     "Patrick Yott",
+     "00000000@neu.edu",
+     "Patrick",
+     "northeastern:library:staff:rads;northeastern:library:drs;northeastern:drs:staff",
+     "cn=staff,ou=drs,ou=grouper,ou=groups,dc=neu,dc=edu;cn=Staff,ou=Groups,dc=neu,dc=edu;cn=drs,ou=library,ou=grouper,ou=groups,dc=neu,dc=edu;cn=rads,ou=staff,ou=library,ou=grouper,ou=groups,dc=neu,dc=edu",
+     000000000,
+     "Yott",
+     "staff");
+     return $user->greet();
+})->bind('my-account');
 
 
 return $app;

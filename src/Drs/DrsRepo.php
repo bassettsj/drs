@@ -6,9 +6,10 @@ namespace Drs;
 
 class DrsRepo {
   
-  private $baseUrl;
+  protected $baseUrl;
 
-  private $getMediaMethod;
+  protected $getMediaMethod;
+  
   /**
    * Queries the Fedora Repository for the media streams to serve the users. Each fedora media stream is a new instance of the 
    * @param  DrsItem $item The parent item to look for media streams on.
@@ -29,7 +30,6 @@ class DrsRepo {
           $mediaPid = str_replace('info:fedora/', '', $v);
           $mediaItem = new DrsItem($mediaPid, $solr);
           $mediaItem -> mediaMethodsUrl = $this -> baseUrl . $mediaItem -> getPid() . '/methods?format=xml';
-          //Adding the old code
           
           //Simple XML Items
           $xml = simplexml_load_file($mediaItem -> mediaMethodsUrl);

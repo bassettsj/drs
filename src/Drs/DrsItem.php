@@ -6,6 +6,15 @@ class DrsItem {
   //String id.
   protected $pid = '';
   
+  protected $DC = '';
+
+  protected $create = array();
+  protected $read = array();
+  protected $update = array();
+  protected $delete = array();
+
+
+
   /**
    * Public function to return the pid string.
    * @return string PID returned, unique ID for Item.
@@ -14,9 +23,6 @@ class DrsItem {
   public function getPid(){
     return $this->pid;
   }
-
-
-  
 
   /**
    * Sets the objects pid

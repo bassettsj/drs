@@ -8,7 +8,7 @@
   {% if item.type_txt == "image" %}
   <article>
     <header class="page-header">  
-      <h1>{{  item.title_display }}</h1>
+      <h1>{{  item.title_display|title }}</h1>
     </header>
     <div class="row">
       <figure class="col col-lg-6">
@@ -22,25 +22,25 @@
         {% if item.name|length > 0 %}
           <dt>Author</dt>
           {% for name in item.name %}
-            <dd>{{name|capitalize}}</dd>
+            <dd>{{name|title}}</dd>
           {% endfor %}
         {% endif %}
         {% if item.role > 0 %}
           <dt>Role</dt>
           {% for role in item.role %}
-            <dd>{{role|capitalize}}</dd>
+            <dd>{{role|title}}</dd>
           {% endfor %}
         {% endif %}  
         {% if item.subject|length > 0 %}
           <dt>Subject</dt>
           {% for subject in item.subject %}
-            <dd>{{subject|capitalize}}</dd>
+            <dd>{{subject|title}}</dd>
           {% endfor %}
         {% endif %}
         {% if item.genre|length > 0 %}
           <dt>Genre</dt>
             {% for genre in item.genre %}
-              <dd>{{genre|capitalize}}<dd>
+              <dd>{{genre|title}}<dd>
             {% endfor %}
         {% endif %}
           <dt>Date Added</dt>
@@ -49,13 +49,13 @@
         {% if item.publisher |length > 0 %}
           <dt>Publisher</dt>
             {% for publisher in item.publisher %}
-              <dd>{{publisher|capitalize}}<dd>
+              <dd>{{publisher|title}}<dd>
             {% endfor %}
         {% endif %}
         {% if item.pubPlace|length > 0 %}
           <dt>Publisher Location</dt>
             {% for pubPlace in item.pubPlace %}
-              <dd>{{pubPlace|capitalize}}<dd>
+              <dd>{{pubPlace|title}}<dd>
             {% endfor %}
         {% endif %}
         </dl>

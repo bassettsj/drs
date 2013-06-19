@@ -12,6 +12,7 @@ use Silex\Provider\ValidatorServiceProvider;
 use SilexAssetic\AsseticExtension;
 use Symfony\Component\Security\Core\Encoder\PlaintextPasswordEncoder;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
+use Dflydev\Silex\Provider\DoctrineOrm\DoctrineOrmServiceProvider;
 use Drs\DrsCollectionServiceProvider;
 
 
@@ -83,10 +84,24 @@ if (isset($app['assetic.enabled']) && $app['assetic.enabled']) {
 
 $app->register(new Silex\Provider\DoctrineServiceProvider());
 
+$app->register(new DoctrineOrmServiceProvider, array(
+    "orm.proxies_dir" => "/path/to/proxies",
+    "orm.em.options" => array(
+        "mappings" => array(
+            // Using actual filesystem paths
+            array(
+                "type" => "annotation",
+                "namespace" => "Foo\Entities",
+                "path" => __DIR__."/src/Foo/Entities",
+            ),
+        ),
+    ),
+));
+
+
 
 $app->register(new Drs\DrsSearchServiceProvider());
 
 $app->register(new Drs\DrsRepoServiceProvider());
-
 
 return $app;
