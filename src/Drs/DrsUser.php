@@ -18,6 +18,28 @@ class DrsUser {
   private $neuEduNUID;
   private $sn;
   private $unscopedAffiliation;
+  
+  private $savedCollections = array();
+  private $Vars = array();
+
+
+  public function getSavedcollections(){
+    return $this->savedCollections;
+  }
+  
+
+  public function addUserCollection(DrsUserCollection $DrsUserCollection){
+    if (array_key_exists($DrsUserCollection->getName(), $this->savedCollections)){
+      trigger_error("Name already in use!",E_USER_ERROR);
+    }
+    else{
+      $this->savedCollections[$DrsUserCollection ->getName()] = $DrsUserCollection;
+    }
+  }
+  public function __toString(){
+    $stub = "$this->cn";
+    return $stub;
+  }
 
 
 
@@ -37,10 +59,6 @@ class DrsUser {
     $this-> neuEduNUID =  $neuEduNUID;
     $this-> sn =  $sn;
     $this-> unscopedAffiliation =  $unscopedAffiliation;
-  }
-
-  public function greet(){
-    return "Hello I am {$this->cn} {$this->sn}";
   }
 
 }

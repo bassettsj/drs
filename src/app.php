@@ -90,9 +90,9 @@ $app->register(new DoctrineOrmServiceProvider, array(
         "mappings" => array(
             // Using actual filesystem paths
             array(
-                "type" => "annotation",
-                "namespace" => "Foo\Entities",
-                "path" => __DIR__."/src/Foo/Entities",
+                "type" => "yml",
+                "namespace" => "Drs\DrsItem",
+                "resources_namespace" => "Drs\DrsItem",
             ),
         ),
     ),
