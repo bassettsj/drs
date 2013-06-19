@@ -10,5 +10,5 @@ class DrsCollection extends DrsItem{
   public $abstract;
   public $thumbnail;
   private $read;
-  private $write
+  private $write;
 }

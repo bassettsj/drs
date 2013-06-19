@@ -4,8 +4,34 @@ namespace Drs;
 
 class DrsItem {
   //String id.
-  public $pid;
+  protected $pid = '';
   
+  /**
+   * Public function to return the pid string.
+   * @return string PID returned, unique ID for Item.
+   */
+  
+  public function getPid(){
+    return $this->pid;
+  }
+
+
+  
+
+  /**
+   * Sets the objects pid
+   * @param String $pid unique ID for the object.
+   */
+  
+  public function setPid($pid){
+    if(!is_string($pid)){
+      trigger_error("$pid must be a string",E_USER_ERROR);
+    }
+    else{
+      $this->pid = $pid;
+    }
+
+  }
 
   /**
    * Building the construct object for DRS items when they are created.

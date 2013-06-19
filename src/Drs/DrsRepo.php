@@ -9,9 +9,14 @@ class DrsRepo {
   private $baseUrl;
 
   private $getMediaMethod;
-
+  /**
+   * Queries the Fedora Repository for the media streams to serve the users. Each fedora media stream is a new instance of the 
+   * @param  DrsItem $item The parent item to look for media streams on.
+   * @param  Solarium\Client $solr Solarium client to communicate to the Solr index.
+   * @return DrsItem       The parent item with an associative array of all the DrsItemClasses for each one.
+   */
   public function  getMedia($item, $solr){
-    $url = $this->baseUrl . $item->pid  . $this->getMediaMethod;
+    $url = $this->baseUrl . $item->getPid()  . $this->getMediaMethod;
     //Test to see if 
     $headers = get_headers($url, 1);
     if ($headers[0] == 'HTTP/1.1 200 OK'){
@@ -23,7 +28,7 @@ class DrsRepo {
         foreach ($doc->member->attributes() as $k => $v){
           $mediaPid = str_replace('info:fedora/', '', $v);
           $mediaItem = new DrsItem($mediaPid, $solr);
-          $mediaItem -> mediaMethodsUrl = $this -> baseUrl . $mediaItem -> pid . '/methods?format=xml';
+          $mediaItem -> mediaMethodsUrl = $this -> baseUrl . $mediaItem -> getPid() . '/methods?format=xml';
           //Adding the old code
           
           //Simple XML Items
@@ -33,13 +38,12 @@ class DrsRepo {
 
           $mediaItem -> mediaMethods = array();
           foreach ($xml->sDef->method as $method){
-             
-             $mediaItem->mediaMethods[(string)$method['name']] = (string) ($this -> baseUrl . $mediaItem -> pid .'/methods/'. $mediaItem->mediaType . '/'.(string)$method['name']);
+             $mediaItem->mediaMethods[(string)$method['name']] = (string) ($this -> baseUrl . $mediaItem -> getPid() .'/methods/'. $mediaItem->mediaType . '/'.(string)$method['name']);
           }
 
 
 
-         array_push($item->media, $mediaItem);
+         $item->media[$mediaItem->mediaType] = $mediaItem;
         }  
       }
       return $item;
