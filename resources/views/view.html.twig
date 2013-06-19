@@ -7,28 +7,75 @@
 {% block content %}
   {% if item.type_txt == "image" %}
   <article>
-    <header>  
+    <header class="page-header">  
       <h1>{{  item.title_display }}</h1>
     </header>
     <div class="row">
       <figure class="col col-lg-6">
-        <img src="{{item.lowres}}"/>
+        <img src="{{item.lowres}}" alt="{{item.abstract[0]}}" title="{{ item.title_display }}"/>
         <figcaption>
           {{item.abstract[0]}}
         </figcaption>
       </figure>
-      
-
+      <section class="col col-lg-6">
+        <dl>
+        {% if item.name|length > 0 %}
+          <dt>Author</dt>
+          {% for name in item.name %}
+            <dd>{{name|capitalize}}</dd>
+          {% endfor %}
+        {% endif %}
+        {% if item.role > 0 %}
+          <dt>Role</dt>
+          {% for role in item.role %}
+            <dd>{{role|capitalize}}</dd>
+          {% endfor %}
+        {% endif %}  
+        {% if item.subject|length > 0 %}
+          <dt>Subject</dt>
+          {% for subject in item.subject %}
+            <dd>{{subject|capitalize}}</dd>
+          {% endfor %}
+        {% endif %}
+        {% if item.genre|length > 0 %}
+          <dt>Genre</dt>
+            {% for genre in item.genre %}
+              <dd>{{genre|capitalize}}<dd>
+            {% endfor %}
+        {% endif %}
+          <dt>Date Added</dt>
+            <dd>{{item.deposit_date|date("m/d/Y")}}<dd>
+          <dt>
+        {% if item.publisher |length > 0 %}
+          <dt>Publisher</dt>
+            {% for publisher in item.publisher %}
+              <dd>{{publisher|capitalize}}<dd>
+            {% endfor %}
+        {% endif %}
+        {% if item.pubPlace|length > 0 %}
+          <dt>Publisher Location</dt>
+            {% for pubPlace in item.pubPlace %}
+              <dd>{{pubPlace|capitalize}}<dd>
+            {% endfor %}
+        {% endif %}
+        </dl>
+        {% if item.note|length > 0 %}
+          {% for note in item.note %}
+            <p class="note">
+              Note: <small>{{note}}</small>
+            </p>
+          {% endfor %}
+        {% endif %}
       {% if item.media is not empty %}
         <div>
           <ul>
           {% for media in item.media %}
             {% if media.mediaType == "sdef:image_thumbnail"%}
-              <li><a href="{{media.mediaMethods.getTHUMBNAIL}}">Thumbnail</a><a href="{{media.mediaMethods.getFITS}}"><span class="glyphicon-info-sign glyphicon"></span></a></li>
+              <li><a href="{{media.mediaMethods.getTHUMBNAIL}}">Thumbnail</a>  <a href="{{media.mediaMethods.getFITS}}"><span class="glyphicon-info-sign glyphicon"></span></a></li>
             {% elseif media.mediaType == "sdef:image_lowres"%}
-              <li>Low Res Image</li>
+              <li><a href="{{media.mediaMethods.getLOWRES}}">Low Resolution Image</a>  <a href="{{media.mediaMethods.getFITS}}"><span class="glyphicon-info-sign glyphicon"></span></a></li>
             {% elseif media.mediaType ==  "sdef:image_highres"%}
-              <li>High Resolution Image</li>
+              <li><a href="{{media.mediaMethods.getHIGHRES}}">High Resolution Image</a>  <a href="{{media.mediaMethods.getFITS}}"><span class="glyphicon-info-sign glyphicon"></span></a></li>
             {% else %}
               <li>{{meida.mediaType}}</li>
             {% endif %}
@@ -36,7 +83,7 @@
           <ul>
         </div>
       {% endif %}
-    </div>
+    </div><!--end row -->
   <article>
   {% endif %}
 {% endblock %}

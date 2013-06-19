@@ -233,7 +233,7 @@ $app->match('/search/{keywords}', function($keywords) use ($app){
     $query-> setRows(40);
     $resultset = $client -> select($query);
     $docset = $resultset -> getDocuments();
-    
+    d($docset);
     return $app['twig']->render('search.html.twig', array('keywords' => $keywords, 'resultset' => $docset));
 });
 

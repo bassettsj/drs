@@ -17,7 +17,7 @@ class DrsRepo {
    */
   public function  getMedia($item, $solr){
     $url = $this->baseUrl . $item->getPid()  . $this->getMediaMethod;
-    //Test to see if 
+    //Test to see if we were able to find the server!
     $headers = get_headers($url, 1);
     if ($headers[0] == 'HTTP/1.1 200 OK'){
       $xml = simplexml_load_file($url);
