@@ -299,4 +299,16 @@ $app->get('/repo', function() use ($app){
 
 });
 
+$app->get('/download/{pid}', function($pid) use ($app){
+    $pid = "neu:120306";
+    $type = "sdef:image_highres";
+    $item = new DrsItem($pid, $app['solr']);
+    $repo = $app['drs.repo'];
+    $media = $repo -> getMedia($item, $app['solr']);
+    $hires = $media->media[2]->mediaMethods['getHIGHRES'];
+    return $hires;
+});
+
+
+
 return $app;
