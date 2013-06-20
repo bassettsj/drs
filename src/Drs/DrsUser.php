@@ -29,13 +29,9 @@ class DrsUser {
   
 
   public function addUserCollection(DrsUserCollection $DrsUserCollection){
-    if (array_key_exists($DrsUserCollection->getName(), $this->savedCollections)){
-      trigger_error("Name already in use!",E_USER_ERROR);
-    }
-    else{
-      $this->savedCollections[$DrsUserCollection ->getName()] = $DrsUserCollection;
-    }
+      $this->savedCollections[$DrsUserCollection -> getUniqueID()] = $DrsUserCollection;
   }
+
   public function __toString(){
     $stub = "$this->cn";
     return $stub;

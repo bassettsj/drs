@@ -338,8 +338,11 @@ $app->match('/my-account', function(Request $request) use ($app) {
      000000000,
      "Yott",
      "staff");
-    echo $user; 
-     return $user->greet();
+
+
+    d($user);
+    return $user; 
+    
 })->bind('my-account');
 
 
