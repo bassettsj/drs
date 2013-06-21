@@ -17,7 +17,7 @@ class DrsRepo {
    * @return DrsItem       The parent item with an associative array of all the DrsItemClasses for each one.
    */
   public function  getMedia($item, $solr){
-    $url = $this->baseUrl . $item->getPid()  . $this->getMediaMethod;
+    $url = $this->baseUrl .'/objects/'. $item->getPid()  . $this->getMediaMethod;
     //Test to see if we were able to find the server!
     $headers = get_headers($url, 1);
     if ($headers[0] == 'HTTP/1.1 200 OK'){
@@ -54,13 +54,35 @@ class DrsRepo {
     
   }
 
+  /**
+   * [buildDrsItem description]
+   * @param  [type] $pid [description]
+   * @return [type]      [description]
+   */
   public function buildDrsItem($pid){
     $DrsItem = new DrsItem($pid);
-    
-
-
+    $this->buildDrsItemDc($DrsItem);
+    //pull the DC and method list.
     return $DrsItem;
+  
+    
+    
+    }
+
+  public function buildDrsItemDc(DrsItem &$DrsItem){
+    $DcUrl = $this->baseUrl . '/get/' . $DrsItem->getPid() . '/DC';
+    $headers = get_headers($DcUrl, 1);
+    if ($headers[0] != 'HTTP/1.1 200 OK'){
+      trigger_error('Unable to connect to the Fedora Repository, DrsRepo->buidlDrsItemDc could not execute'); 
+    }
+    else{
+      $xml = simplexml_load_file($DcUrl);
+      $DrsItem->setDC($xml);
+    }
+
+    
   }
+
 
 
   public function __construct($config){

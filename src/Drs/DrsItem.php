@@ -67,6 +67,20 @@ class DrsItem {
     }
 
   }
+  /**
+   * Get set the Dublin Core record object as a Simple XML Object.
+   * @param \SimpleXMLElement $DCxml Dublin Core Object given.
+   */
+  public function setDC(\SimpleXMLElement $DCxml){
+    $this->DC = $DCxml;
+  }
+  /**
+   * getDC provides the SimpleXMLElement for the object if available.
+   * @return SimpleXMLElemnet SimpleXMLElement for the Dublin Core record.
+   */
+  public function getDC(){
+    return $this->DC;
+  }
 
   /**
    * Building the construct object for DRS items when they are created.

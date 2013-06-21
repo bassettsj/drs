@@ -351,7 +351,7 @@ $app->match('/my-account', function(Request $request) use ($app) {
 
     
     $item = $repo->buildDrsItem($pid, $user);
-
+    d($item->getDC()->getName());
 
     d($item);
     return $user; 
