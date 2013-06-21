@@ -5,7 +5,7 @@ namespace Drs;
 use Silex\Application;
 
 class DrsUser {
-
+  
   private $department;
   private $departmentDesc;
   private $school;
@@ -36,11 +36,6 @@ class DrsUser {
     $stub = "$this->cn";
     return $stub;
   }
-
-
-
-
-
 
   public function __construct($department, $departmentDesc, $school, $schoolDesc, $cn, $eppn, $givenName, $grouper, $ismemberof, $neuEduNUID, $sn, $unscopedAffiliation){
     $this-> department =  $department;

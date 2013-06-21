@@ -14,4 +14,3 @@ $post->setPrimaryKey(array('id'));
 
 
 return $schema;
-

@@ -31,7 +31,7 @@
         "twitter/bootstrap"     : "2.3.1",
         "solarium/solarium"     : "dev-develop",
         "raveren/kint"          : "dev-master",
-        "dflydev/doctrine-orm-service-provider": "1.0.*@dev"
+        "filp/whoops"           : "1.*"
 
     },
     "require-dev": {

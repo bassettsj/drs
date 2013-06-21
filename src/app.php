@@ -84,19 +84,10 @@ if (isset($app['assetic.enabled']) && $app['assetic.enabled']) {
 
 $app->register(new Silex\Provider\DoctrineServiceProvider());
 
-$app->register(new DoctrineOrmServiceProvider, array(
-    "orm.proxies_dir" => "/path/to/proxies",
-    "orm.em.options" => array(
-        "mappings" => array(
-            // Using actual filesystem paths
-            array(
-                "type" => "yml",
-                "namespace" => "Drs\DrsItem",
-                "resources_namespace" => "Drs\DrsItem",
-            ),
-        ),
-    ),
-));
+
+if($app['debug']) {
+    $app->register(new Whoops\Provider\Silex\WhoopsServiceProvider);
+}
 
 
 
