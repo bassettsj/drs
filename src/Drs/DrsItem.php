@@ -43,7 +43,13 @@ class DrsItem {
   protected $delete = array();
 
 
+  /**
+   * DRS Object Label
+   * @var string
+   */
+  protected $title = "DRS Object";
 
+  public $methods = array();
   /**
    * Public function to return the pid string.
    * @return string PID returned, unique ID for Item.

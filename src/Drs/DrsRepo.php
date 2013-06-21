@@ -55,33 +55,58 @@ class DrsRepo {
   }
 
   /**
-   * [buildDrsItem description]
-   * @param  [type] $pid [description]
-   * @return [type]      [description]
+   * Builds an instance of a DrsItem for the application to use.
+   * @param  string $pid PID Object Identifier
+   * @return Drs\DrsItem     Returns  a base DrsItem from the XML responses.
    */
   public function buildDrsItem($pid){
     $DrsItem = new DrsItem($pid);
-    $this->buildDrsItemDc($DrsItem);
-    //pull the DC and method list.
     return $DrsItem;
   
     
     
+  }
+  /**
+   * Test to see if the URL is reachable
+   * @param  string $url URL string to test.
+   * @return boolean       If it is reachable.
+   */
+  private function testHeaders($url){
+    $headers = get_headers($url, 1);
+    if ($headers['0'] !==  "HTTP/1.1 200 OK"){
+      trigger_error('Unable to connect to the Fedora Repository'); 
+      return False;
     }
+    else{
+      return True;
+    }
+  }
 
   public function buildDrsItemDc(DrsItem &$DrsItem){
     $DcUrl = $this->baseUrl . '/get/' . $DrsItem->getPid() . '/DC';
-    $headers = get_headers($DcUrl, 1);
-    if ($headers[0] != 'HTTP/1.1 200 OK'){
-      trigger_error('Unable to connect to the Fedora Repository, DrsRepo->buidlDrsItemDc could not execute'); 
-    }
-    else{
+    if ($this->testHeaders($DcUrl)){
       $xml = simplexml_load_file($DcUrl);
       $DrsItem->setDC($xml);
+      return $DrsItem;
     }
-
-    
   }
+
+  
+  public function buildDrsObjectMethod(DrsItem $DrsItem){
+    $methodUrl = $this->baseUrl . '/objects/' . $DrsItem->getPid() . '/methods?format=xml';
+    if ($this->testHeaders($methodUrl)){
+      $xml = simplexml_load_file($methodUrl);
+      foreach($xml->sDef as $sDef){
+        $sDefPid = (string) $sDef['pid'];
+        $DrsItem->methods[$sDefPid] = array();
+        foreach($sDef->method as $method){
+          array_push($DrsItem->methods[$sDefPid], (string)$method['name']);
+        }
+      }
+      return $DrsItem;
+    }
+  }
+
 
 
 

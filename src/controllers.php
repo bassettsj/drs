@@ -337,10 +337,12 @@ $app->match('/my-account', function(Request $request) use ($app) {
      "cn=staff,ou=drs,ou=grouper,ou=groups,dc=neu,dc=edu;cn=Staff,ou=Groups,dc=neu,dc=edu;cn=drs,ou=library,ou=grouper,ou=groups,dc=neu,dc=edu;cn=rads,ou=staff,ou=library,ou=grouper,ou=groups,dc=neu,dc=edu",
      000000000,
      "Yott",
-     "staff");
+     "staff"
+     )
+    ;
 
 
-    d($user);
+    
     
 
 
@@ -348,11 +350,14 @@ $app->match('/my-account', function(Request $request) use ($app) {
     
     
     $repo = $app['drs.repo'];
-
+    d($repo);
+    d($user);
     
-    $item = $repo->buildDrsItem($pid, $user);
-    d($item->getDC()->getName());
+    $item = $repo->buildDrsItem($pid);
 
+    $item = $repo->buildDrsItemDc($item);
+    //$item =$repo->buildDrsObjectMethod($item);
+    d($repo->buildDrsObjectMethod($item));
     d($item);
     return $user; 
     
