@@ -3,14 +3,43 @@
 namespace Drs;
 
 class DrsItem {
-  //String id.
+  
+  /**
+   * PID is the Unique ID for the Fedora Object.
+   * @var string
+   */
   protected $pid = '';
   
-  protected $DC = '';
+  /**
+   * Dublin Core Record
+   * @var null
+   */
+  protected $DC = null;
 
+
+  /**
+   * Creat permissions
+   * @var array
+   */
   protected $create = array();
+  
+
+  /**
+   * Read permissions
+   * @var array
+   */
   protected $read = array();
+
+  /**
+   * Update permisssiosn 
+   * @var array
+   */
   protected $update = array();
+
+  /**
+   * Delete premissions
+   * @var array
+   */
   protected $delete = array();
 
 
@@ -44,16 +73,16 @@ class DrsItem {
    * @param string $pid  unique string in the DRS fedora repository.
    * @param object $solr Solarium item class.
    */
-  public function __construct($pid, $solr){
+  public function __construct($pid){ //$solr){
     $this->pid = $pid;
-    $query = $solr->createSelect();
-    $query->setQuery('pid:"'.$pid.'"');
-    $query->setRows(1);
-    $result = $solr -> select($query);
-    $doc = $result -> getDocuments();
-    foreach($doc[0] as $key => $value){
-      $this->$key = $value;
-    }
+    // $query = $solr->createSelect();
+    // $query->setQuery('pid:"'.$pid.'"');
+    // $query->setRows(1);
+    // $result = $solr -> select($query);
+    // $doc = $result -> getDocuments();
+    // foreach($doc[0] as $key => $value){
+    //   $this->$key = $value;
+    // }
   }
 
   /**

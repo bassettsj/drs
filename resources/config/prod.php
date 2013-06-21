@@ -4,9 +4,9 @@ require __DIR__.'/private.php';
 // Local
 $app['locale'] = 'en-US';
 $app['session.default_locale'] = $app['locale'];
-// $app['translator.messages'] = array(
-//     'fr' => __DIR__.'/../resources/locales/fr.yml',
-// );
+$app['translator.messages'] = array(
+    'fr' => __DIR__.'/../resources/locales/fr.yml',
+);
 
 // Cache
 $app['cache.path'] = __DIR__ . '/../cache';

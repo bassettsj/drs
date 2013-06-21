@@ -18,9 +18,15 @@ class DrsUser {
   private $neuEduNUID;
   private $sn;
   private $unscopedAffiliation;
+
+  /**
+   * Parsed the grouper string for identities.
+   * @var array
+   */
+  private $identites = array();
   
   private $savedCollections = array();
-  private $Vars = array();
+  private $vars = array();
 
 
   public function getSavedcollections(){
@@ -37,6 +43,17 @@ class DrsUser {
     return $stub;
   }
 
+
+  /**
+   * Parse our the Grouper string sepereated by `;`, return an array of those string .
+   * @param  string $grouper The grouper string
+   * @return array           and array of identities for the DrsUser.
+   */
+  private function parseGrouper($grouper){
+    $identitiesArray = preg_split("/[;]+/",$grouper);
+    return $identitiesArray;
+  }
+
   public function __construct($department, $departmentDesc, $school, $schoolDesc, $cn, $eppn, $givenName, $grouper, $ismemberof, $neuEduNUID, $sn, $unscopedAffiliation){
     $this-> department =  $department;
     $this-> departmentDesc =  $departmentDesc;
@@ -50,6 +67,7 @@ class DrsUser {
     $this-> neuEduNUID =  $neuEduNUID;
     $this-> sn =  $sn;
     $this-> unscopedAffiliation =  $unscopedAffiliation;
+    $this->identities = $this->parseGrouper($grouper);
   }
 
 }

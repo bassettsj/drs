@@ -85,9 +85,9 @@ if (isset($app['assetic.enabled']) && $app['assetic.enabled']) {
 $app->register(new Silex\Provider\DoctrineServiceProvider());
 
 
-if($app['debug']) {
-    $app->register(new Whoops\Provider\Silex\WhoopsServiceProvider);
-}
+// if($app['debug']) {
+//     $app->register(new Whoops\Provider\Silex\WhoopsServiceProvider);
+// }
 
 
 

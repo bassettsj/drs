@@ -341,6 +341,19 @@ $app->match('/my-account', function(Request $request) use ($app) {
 
 
     d($user);
+    
+
+
+    $pid = 'neu:126874';
+    
+    
+    $repo = $app['drs.repo'];
+
+    
+    $item = $repo->buildDrsItem($pid, $user);
+
+
+    d($item);
     return $user; 
     
 })->bind('my-account');

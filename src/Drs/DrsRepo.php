@@ -54,6 +54,14 @@ class DrsRepo {
     
   }
 
+  public function buildDrsItem($pid){
+    $DrsItem = new DrsItem($pid);
+    
+
+
+    return $DrsItem;
+  }
+
 
   public function __construct($config){
     foreach($config as $key => $value){
